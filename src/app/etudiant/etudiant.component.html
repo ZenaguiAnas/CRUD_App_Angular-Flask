@@ -1,0 +1,30 @@
+<p>je suis la component etudiant</p>
+
+<h1> Hello {{name}}</h1>
+
+<button [disabled]="!flag" (click)="clickme()"> click me !!!!</button>
+
+
+<table>
+<th>
+    userId
+</th>
+<th>
+    id
+</th>
+<th>
+    title
+</th>
+<th>
+    body
+</th>
+
+<tr  *ngFor="let ps of results">
+<td>{{ps.userId}}</td>
+<td>{{ps.id}}</td>
+<td>{{ps.title}}</td>
+<td>{{ps.body}}</td>
+
+</tr>
+
+</table>

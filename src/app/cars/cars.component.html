@@ -1,0 +1,27 @@
+<p>List of cars </p>
+
+<table>
+
+
+    <th>
+id
+    </th>
+    <th>
+       model 
+    </th>
+    <th>
+        hp
+    </th>
+    <th>
+       marque 
+    </th>
+
+
+<tr  *ngFor="let car of cars">
+    <td>{{car.id_car}}</td>
+    <td>{{car.model}}</td>
+    <td>{{car.hp}}</td>
+    <td>{{car.marque}}</td>
+</tr>
+
+</table>

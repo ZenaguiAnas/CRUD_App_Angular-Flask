@@ -1,0 +1,15 @@
+<label>a</label>
+<input type="number" [(ngModel)]="a"/> <br/>
+
+<label>b</label>
+<input type="number"  [(ngModel)]="b"/><br/>
+
+<button (click)="add()" > + </button><br/>
+
+<label>+</label> <input type="radio" name="all"   (click)="allinone($event)"  value="a"/><br/>
+<label>-</label> <input type="radio" name="all"   (click)="allinone($event)" value="s"/><br/>
+<label>*</label> <input type="radio" name="all"    (click)="allinone($event)" value="m"/><br/>
+<label>/</label> <input type="radio" name="all"  (click)="allinone($event)" value="d"/><br/>
+<label>%</label> <input type="radio" name="all"   (click)="allinone($event)" value="mo"/><br/>
+
+<div> Result : {{res}}</div>

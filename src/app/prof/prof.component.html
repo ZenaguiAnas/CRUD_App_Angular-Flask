@@ -1,0 +1,43 @@
+<div style="width:20px;height:20px;background-color:red;"
+
+*ngIf = "flag==true">
+
+
+</div>
+
+<button (click)="active()"> Active </button>
+
+<table>
+<th> Name</th>
+<th> Gnnder</th>
+<!-- strecture iterative-->
+<tr *ngFor="let et of etudiants">
+
+    <td>{{et.name}}</td>
+    <td>{{et.sexe}}</td>
+</tr>
+
+<ng-container *ngIf=" age == 10 ; then loggedIn ;else  loggedOut " ></ng-container>
+
+<ng-template #loggedIn>
+   loggedIn
+   </ng-template>
+<ng-template #loggedOut>
+  loggedOut
+  </ng-template>
+
+
+</table>
+
+
+<label> Curent date : {{currentDate}} </label> <br>
+
+<label> Curent date format  : {{currentDate | date}} </label><br>
+
+<label> Curent date format  : {{currentDate | date: 'short' }} </label><br>
+<label> Curent date format  : {{currentDate | date: 'yMMMMEEEEd' }} </label><br>
+
+<label> Curent date format  : {{currentDate | date: 'yMMMMEEEEd' | uppercase }} </label><br>
+
+<!-- asaync pipe and others pipes -->
+<p>Mis à jour : {{ lastUpdate  | async }}</p>
