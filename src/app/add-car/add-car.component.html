@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Add Car</h2>
+  <form [formGroup]="addCarForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id_car" type="number" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Model</mat-label>
+      <input matInput formControlName="model" type="text" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>HP</mat-label>
+      <input matInput formControlName="hp" type="number" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Marque</mat-label>
+      <input matInput formControlName="marque" type="text" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add</button>
+  </form>
+</div>
