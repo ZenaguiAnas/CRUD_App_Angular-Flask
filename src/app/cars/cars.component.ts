@@ -6,25 +6,14 @@ import { CarServiceService } from '../car-service.service';
 @Component({
   selector: 'app-cars',
   templateUrl: './cars.component.html',
-  styleUrls: ['./cars.component.css']
+  styleUrls: ['./cars.component.css'],
 })
 export class CarsComponent {
+  cars!: CarModule[];
 
-
-  cars!:CarModule[];
-
-
-constructor(private myservice:CarServiceService){
-  this.myservice.getAllcars().subscribe(
-
-      (data)=>{
-
-        this.cars = data;
-      }
-
-
-  );
-}
-
-
+  constructor(private myservice: CarServiceService) {
+    this.myservice.getAllcars().subscribe((data) => {
+      this.cars = data;
+    });
+  }
 }

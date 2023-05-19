@@ -1,19 +1,37 @@
-
-<h1> Page principal</h1>
+<!-- <h1>Page principal</h1>
 
 <nav>
-
-    <li >  <a routerLink="/">Home</a>  </li>
-    <li> <a routerLink="/addcar">Add car</a></li>
-    <li> <a routerLink="/lisofcars">Cars</a></li>
-    <li><a routerLink="/calculator">Calulator</a></li>
-
-
+  <li><a routerLink="/">Home</a></li>
+  <li><a routerLink="/addcar">Add car</a></li>
+  <li><a routerLink="/lisofcars">Cars</a></li>
+  <li><a routerLink="/calculator">Calulator</a></li>
 </nav>
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
 
-
-
-
+<!-- Toolbar -->
+<mat-toolbar color="primary" class="header">
+  <div>Student Records</div>
+  <span class="nav-tool-items">
+    <mat-icon (click)="sidenav.toggle()" class="hamburger">menu</mat-icon>
+  </span>
+</mat-toolbar>
+<mat-sidenav-container>
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
+    [fixedTopGap]>
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="active" routerLink="/add-student">
+        <mat-icon>add</mat-icon> Add Student
+      </a>
+      <a mat-list-item routerLinkActive="active" routerLink="/students-list">
+        <mat-icon>format_list_bulleted</mat-icon> View Students
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <!-- Main content -->
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
