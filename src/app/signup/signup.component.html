@@ -1,5 +1,5 @@
-<h2>Login</h2>
-<form (ngSubmit)="login()">
+<h2>Signup</h2>
+<form (ngSubmit)="signup()">
   <mat-form-field>
     <mat-label>Email</mat-label>
     <input matInput type="email" id="email" [(ngModel)]="email" required>
@@ -8,5 +8,5 @@
     <mat-label>Password</mat-label>
     <input matInput type="password" id="password" [(ngModel)]="password" required>
   </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Log In</button>
+  <button mat-raised-button color="primary" type="submit">Sign Up</button>
 </form>

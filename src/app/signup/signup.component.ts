@@ -3,27 +3,26 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent {
+export class SignupComponent {
   email: string = '';
   password: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(): void {
+  signup(): void {
     const userData = { email: this.email, password: this.password };
-    this.http.post<any>('http://localhost:5000/login', userData).subscribe(
+    this.http.post<any>('http://localhost:5000/signup', userData).subscribe(
       (response) => {
         localStorage.setItem('token', response.token);
         this.router.navigate(['/dashboard']); 
       },
       (error) => {
-        console.log('Error during login:', error);
+        console.log('Error during signup:', error);
       }
     );
   }
 }
-

@@ -10,7 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { RouterModule } from '@angular/router'; // Import RouterModule
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -21,6 +21,8 @@ import { ListCarsComponent } from './list-cars/list-cars.component';
 import { DeleteCarComponent } from './delete-car/delete-car.component';
 import { ShowCarComponent } from './show-car/show-car.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
     EditCarComponent,
     ListCarsComponent,
     DeleteCarComponent,
-    ShowCarComponent
+    ShowCarComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule,
