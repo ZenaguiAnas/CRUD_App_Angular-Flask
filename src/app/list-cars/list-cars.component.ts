@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { Car } from '../car.model';
 
@@ -9,13 +10,23 @@ import { Car } from '../car.model';
   styleUrls: ['./list-cars.component.css']
 })
 export class ListCarsComponent implements OnInit {
-  cars!: Car[]; // Array to store the list of cars
+  cars: Car[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
-    // Fetch the list of cars (e.g., from a service or API)
-    // Assign the fetched list of cars to the "cars" property
+    this.fetchCars();
+  }
+
+  fetchCars() {
+    this.http.get<Car[]>('http://localhost:5000/cars').subscribe(
+      (cars: Car[]) => {
+        this.cars = cars;
+      },
+      (error) => {
+        console.log('Error fetching cars:', error);
+      }
+    );
   }
 
   editCar(id: number) {

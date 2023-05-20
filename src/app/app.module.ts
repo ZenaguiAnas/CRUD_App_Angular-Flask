@@ -20,6 +20,8 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 import { ListCarsComponent } from './list-cars/list-cars.component';
 import { DeleteCarComponent } from './delete-car/delete-car.component';
 import { ShowCarComponent } from './show-car/show-car.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { ShowCarComponent } from './show-car/show-car.component';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

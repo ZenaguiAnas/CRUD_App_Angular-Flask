@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-import { Car } from '../car.model';
 
 @Component({
   selector: 'app-add-car',
@@ -12,7 +11,7 @@ import { Car } from '../car.model';
 export class AddCarComponent {
   addCarForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.addCarForm = this.formBuilder.group({
       id_car: ['', Validators.required],
       model: ['', Validators.required],
@@ -26,16 +25,24 @@ export class AddCarComponent {
       return;
     }
 
-    const car: Car = {
-      id_car: this.addCarForm.value.id_car,
+    const car = {
+      id: this.addCarForm.value.id_car,
       model: this.addCarForm.value.model,
       hp: this.addCarForm.value.hp,
       marque: this.addCarForm.value.marque
     };
 
-    // Save the car data (e.g., send it to a service or API)
-
-    this.router.navigate(['/list-cars']);
+    this.http.post<any>('http://localhost:5000/savecar', car)
+      .subscribe(
+        response => {
+          console.log('Car added successfully!');
+          this.router.navigate(['/list-cars']);
+        },
+        error => {
+          console.error('Error adding car:', error);
+        }
+      );
   }
 }
+
 

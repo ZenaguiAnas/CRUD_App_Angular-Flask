@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Car } from '../car.model';
 
 @Component({
   selector: 'app-delete-car',
@@ -7,33 +9,51 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./delete-car.component.css']
 })
 export class DeleteCarComponent implements OnInit {
-  carId: number | null | undefined;
+  carId: number | null | undefined;;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
-    const carIdParam = this.route.snapshot.paramMap.get('id');
-    this.carId = carIdParam ? +carIdParam : null;
+    const carId = this.route.snapshot.paramMap.get('id');
+    this.carId = carId ? +carId : null;
 
     if (this.carId === null) {
       // Handle the case when the carId is null, e.g., display an error message or navigate to an error page
     } else {
-      // Fetch the car data using the carId (e.g., from a service or API)
-      // Display the car data in the template for confirmation
+      this.fetchCar(this.carId);
     }
+  }
+
+  fetchCar(carId: number) {
+    this.http.get(`/api/cars/${carId}`).subscribe(
+      () => {
+        // Display the car data in the template for confirmation
+      },
+      (error) => {
+        console.log('Error fetching car:', error);
+      }
+    );
   }
 
   deleteCar() {
     if (this.carId !== null) {
-      // Perform the delete operation for the car with the carId
-      // (e.g., using a service or API)
-      // After successful deletion, navigate back to the list of cars
-      this.router.navigate(['/list-cars']);
+      this.http.delete(`/api/cars/${this.carId}`).subscribe(
+        () => {
+          this.router.navigate(['/list-cars']);
+        },
+        (error) => {
+          console.log('Error deleting car:', error);
+        }
+      );
     }
   }
 
   cancel() {
-    // Navigate back to the list of cars without deleting the car
     this.router.navigate(['/list-cars']);
   }
 }
+

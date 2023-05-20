@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { Car } from '../car.model';
 
@@ -11,12 +12,28 @@ import { Car } from '../car.model';
 export class ShowCarComponent implements OnInit {
   car!: Car;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
     const carId = this.route.snapshot.paramMap.get('id');
-    // Fetch the car data using the carId (e.g., from a service or API)
-    // Assign the fetched car data to the "car" property
+    if (carId !== null) {
+      this.fetchCar(carId);
+    }
+  }
+
+  fetchCar(carId: string) {
+    this.http.get<Car>(`/api/cars/${carId}`).subscribe(
+      (car: Car) => {
+        this.car = car;
+      },
+      (error) => {
+        console.log('Error fetching car:', error);
+      }
+    );
   }
 
   editCar() {

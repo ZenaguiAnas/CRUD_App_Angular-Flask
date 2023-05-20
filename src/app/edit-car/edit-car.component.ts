@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { Car } from '../car.model';
 
@@ -16,7 +17,8 @@ export class EditCarComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {
     this.editCarForm = this.formBuilder.group({
       id_car: ['', Validators.required],
@@ -28,8 +30,26 @@ export class EditCarComponent implements OnInit {
 
   ngOnInit() {
     const carId = this.route.snapshot.paramMap.get('id');
-    // Fetch the car data using the carId (e.g., from a service or API)
-    // Assign the fetched car data to the "car" property
+    if (carId !== null) {
+      this.fetchCar(carId);
+    }
+  }
+
+  fetchCar(carId: string) {
+    this.http.get<Car>(`/api/cars/${carId}`).subscribe(
+      (car: Car) => {
+        this.car = car;
+        this.editCarForm.patchValue({
+          id_car: this.car.id_car,
+          model: this.car.model,
+          hp: this.car.hp,
+          marque: this.car.marque
+        });
+      },
+      (error) => {
+        console.log('Error fetching car:', error);
+      }
+    );
   }
 
   onSubmit() {
@@ -44,8 +64,13 @@ export class EditCarComponent implements OnInit {
       marque: this.editCarForm.value.marque
     };
 
-    // Update the car data with the updatedCar (e.g., using a service or API)
-
-    this.router.navigate(['/list-cars']);
+    this.http.put(`/api/cars/${this.car.id_car}`, updatedCar).subscribe(
+      () => {
+        this.router.navigate(['/list-cars']);
+      },
+      (error) => {
+        console.log('Error updating car:', error);
+      }
+    );
   }
 }
