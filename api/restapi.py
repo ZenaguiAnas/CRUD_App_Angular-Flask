@@ -4,8 +4,19 @@ import json
 from flask_cors import CORS
 import mysql.connector
 
+import jwt
+import datetime
+
 app = Flask(__name__)
 CORS(app)
+
+class User:
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
+
+
+
 
 mydb = mysql.connector.connect(
     host="127.0.0.1",
@@ -13,6 +24,44 @@ mydb = mysql.connector.connect(
     password="",
     database="crudcar"
 )
+
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+    myCursor = mydb.cursor()
+    myCursor.execute("SELECT * FROM user WHERE email = %s", (email,))
+    existing_user = myCursor.fetchone()
+    if existing_user:
+        return jsonify({'message': 'User already exists'}), 400
+
+    new_user = User(email, password)
+    insert_query = "INSERT INTO user (email, password) VALUES (%s, %s)"
+    insert_values = (new_user.email, new_user.password)
+    myCursor.execute(insert_query, insert_values)
+    mydb.commit()
+
+    token = jwt.encode({'email': new_user.email}, 'your-secret-key')
+
+    return jsonify({'token': token})
+
+@app.route('/login', methods=['POST'])
+def login():
+    email = request.json.get('email')
+    password = request.json.get('password')
+
+    myCursor = mydb.cursor()
+    myCursor.execute("SELECT * FROM user WHERE email = %s", (email,))
+    user = myCursor.fetchone()
+
+    if user and user['password'] == password:
+        token = jwt.encode({'email': user['email']}, 'your-secret-key')
+        return jsonify({'token': token})
+
+    return jsonify({'message': 'Invalid credentials'}), 401
+
 
 
 @app.route('/savecar', methods=['POST'])
@@ -86,7 +135,7 @@ def deleteCar(car_id):
     myresult = myCursor.fetchone()
     if myresult:
         req = "DELETE FROM car WHERE id_car = %s"
-        val = (car_id,)  # Modify this line to pass car_id as a tuple
+        val = (car_id,)  
         myCursor.execute(req, val)
         mydb.commit()
         return "Deleted"

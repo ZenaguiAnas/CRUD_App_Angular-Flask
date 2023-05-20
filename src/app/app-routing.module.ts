@@ -6,6 +6,8 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 import { ListCarsComponent } from './list-cars/list-cars.component';
 import { DeleteCarComponent } from './delete-car/delete-car.component';
 import { ShowCarComponent } from './show-car/show-car.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/list-cars', pathMatch: 'full' },
@@ -13,7 +15,9 @@ const routes: Routes = [
   { path: 'add-car', component: AddCarComponent },
   { path: 'edit-car/:id', component: EditCarComponent },
   { path: 'delete-car/:id', component: DeleteCarComponent },
-  { path: 'show-car/:id', component: ShowCarComponent }
+  { path: 'show-car/:id', component: ShowCarComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
