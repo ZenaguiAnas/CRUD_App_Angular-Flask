@@ -86,12 +86,13 @@ def deleteCar(car_id):
     myresult = myCursor.fetchone()
     if myresult:
         req = "DELETE FROM car WHERE id_car = %s"
-        val = (car_id,)
+        val = (car_id,)  # Modify this line to pass car_id as a tuple
         myCursor.execute(req, val)
         mydb.commit()
         return "Deleted"
     else:
         return jsonify({'message': 'Car not found'}), 404
+
 
 
 if __name__ == '__main__':

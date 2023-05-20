@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Car } from '../car.model';
 
 @Component({
   selector: 'app-delete-car',
@@ -9,7 +8,8 @@ import { Car } from '../car.model';
   styleUrls: ['./delete-car.component.css']
 })
 export class DeleteCarComponent implements OnInit {
-  carId: number | null | undefined;;
+  carId: number | null = null;
+  carData: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,9 +29,9 @@ export class DeleteCarComponent implements OnInit {
   }
 
   fetchCar(carId: number) {
-    this.http.get(`/api/cars/${carId}`).subscribe(
-      () => {
-        // Display the car data in the template for confirmation
+    this.http.get<any>(`http://localhost:5000/cars/${carId}`).subscribe(
+      (car: any) => {
+        this.carData = car;
       },
       (error) => {
         console.log('Error fetching car:', error);
@@ -41,7 +41,7 @@ export class DeleteCarComponent implements OnInit {
 
   deleteCar() {
     if (this.carId !== null) {
-      this.http.delete(`/api/cars/${this.carId}`).subscribe(
+      this.http.delete<any>(`http://localhost:5000/cars/${this.carId}`).subscribe(
         () => {
           this.router.navigate(['/list-cars']);
         },
@@ -56,4 +56,3 @@ export class DeleteCarComponent implements OnInit {
     this.router.navigate(['/list-cars']);
   }
 }
-
