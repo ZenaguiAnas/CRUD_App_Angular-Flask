@@ -1,1 +1,22 @@
-<p>edit-car works!</p>
+<div class="container">
+  <h2>Edit Car</h2>
+  <form [formGroup]="editCarForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id_car" type="number" required [value]="car?.id_car">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Model</mat-label>
+      <input matInput formControlName="model" type="text" required [value]="car?.model">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>HP</mat-label>
+      <input matInput formControlName="hp" type="number" required [value]="car?.hp">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Marque</mat-label>
+      <input matInput formControlName="marque" type="text" required [value]="car?.marque">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Update</button>
+  </form>
+</div>

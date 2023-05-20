@@ -10,15 +10,15 @@
 <router-outlet></router-outlet> -->
 
 <!-- Toolbar -->
-<mat-toolbar color="primary" class="header">
+<!-- <mat-toolbar color="primary" class="header">
   <div>Student Records</div>
   <span class="nav-tool-items">
     <mat-icon (click)="sidenav.toggle()" class="hamburger">menu</mat-icon>
   </span>
 </mat-toolbar>
-<mat-sidenav-container>
+<mat-sidenav-container> -->
   <!-- Sidenav -->
-  <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
+  <!-- <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
     [fixedTopGap]>
     <mat-nav-list>
       <a mat-list-item routerLinkActive="active" routerLink="/add-student">
@@ -28,10 +28,15 @@
         <mat-icon>format_list_bulleted</mat-icon> View Students
       </a>
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
   <!-- Main content -->
-  <mat-sidenav-content>
+  <!-- <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+
+<!-- !!! -->
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
+
 

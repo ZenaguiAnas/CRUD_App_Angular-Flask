@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Show Car</h2>
+  <div>
+    <p><strong>ID:</strong> {{ car?.id_car }}</p>
+    <p><strong>Model:</strong> {{ car?.model }}</p>
+    <p><strong>HP:</strong> {{ car?.hp }}</p>
+    <p><strong>Marque:</strong> {{ car?.marque }}</p>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" (click)="editCar()">Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteCar()">Delete</button>
+  </div>
+</div>
