@@ -10,7 +10,7 @@ import { Car } from '../car.model';
   styleUrls: ['./show-car.component.css']
 })
 export class ShowCarComponent implements OnInit {
-  car!: Car;
+  car: Car | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class ShowCarComponent implements OnInit {
   }
 
   fetchCar(carId: string) {
-    this.http.get<Car>(`/api/cars/${carId}`).subscribe(
+    this.http.get<Car>(`http://localhost:5000/cars/${carId}`).subscribe(
       (car: Car) => {
         this.car = car;
       },
@@ -37,10 +37,14 @@ export class ShowCarComponent implements OnInit {
   }
 
   editCar() {
-    this.router.navigate(['/edit-car', this.car.id_car]);
+    if (this.car) {
+      this.router.navigate(['/edit-car', this.car.id_car]);
+    }
   }
 
   deleteCar() {
-    this.router.navigate(['/delete-car', this.car.id_car]);
+    if (this.car) {
+      this.router.navigate(['/delete-car', this.car.id_car]);
+    }
   }
 }
