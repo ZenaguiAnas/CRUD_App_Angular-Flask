@@ -36,7 +36,7 @@ export class EditCarComponent implements OnInit {
   }
 
   fetchCar(carId: string) {
-    this.http.get<Car>(`/api/cars/${carId}`).subscribe(
+    this.http.get<Car>(`http://localhost:5000/cars/${carId}`).subscribe(
       (car: Car) => {
         this.car = car;
         this.editCarForm.patchValue({
@@ -64,7 +64,7 @@ export class EditCarComponent implements OnInit {
       marque: this.editCarForm.value.marque
     };
 
-    this.http.put(`/api/cars/${this.car.id_car}`, updatedCar).subscribe(
+    this.http.put(`http://localhost:5000/cars/${this.car.id_car}`, updatedCar).subscribe(
       () => {
         this.router.navigate(['/list-cars']);
       },
